@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    volumes:
+      - mssql-data:/var/opt/mssql/mssql:Z
+      - config-data:/var/opt/mssql/config:Z
+    expose:
+      - 1433
+    ports:
+    - "1433:1433"
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD:-"ChangeMe123!"}
+      ACCEPT_EULA: ${ACCEPT_EULA:-"Y"}
+volumes:
+  mssql-data:
+  config-data:
